@@ -1,36 +1,25 @@
 package task1;
 
+import com.sun.istack.internal.NotNull;
+
 public class IndexOfAny {
-  /**
-   * Write covering tests + refactor code.
-   * In this task signature should stay the same
-   */
-  public static int indexOfAny(String str, char[] searchChars) {
-    if(!str.isEmpty() && searchChars.length > 0) {
-      int csLen = str.length();
-      int csLast = csLen - 1;
-      int searchLen = searchChars.length;
-      int searchLast = searchLen - 1;
+    /**
+     * Write covering tests + refactor code.
+     * In this task signature should stay the same
+     * Searching for any character
+     */
+    public static int indexOfAny(@NotNull String str, @NotNull char[] searchChars) {
+        if (!str.isEmpty() && searchChars.length > 0) {
+            for (int i = 0; i < str.length(); ++i) {
+                char ch = str.charAt(i);
 
-      for(int i = 0; i < csLen; ++i) {
-        char ch = str.charAt(i);
-
-        for(int j = 0; j < searchLen; ++j) {
-          if(searchChars[j] == ch) {
-            if(i >= csLast || j >= searchLast) {
-              return i;
+                for (char searchChar : searchChars) {
+                    if (searchChar == ch) {
+                        return i;
+                    }
+                }
             }
-
-            if(searchChars[j + 1] == str.charAt(i + 1)) {
-              return i;
-            }
-          }
         }
-      }
-
-      return -1;
-    } else {
-      return -1;
+        return -1;
     }
-  }
 }

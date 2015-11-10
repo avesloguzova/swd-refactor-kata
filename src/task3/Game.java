@@ -1,16 +1,21 @@
 package task3;
 
+import com.sun.istack.internal.NotNull;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class Game {
+  public static final int MAX_ANSWERS_COUNT = 4;
+
   private List<Question> questions = new ArrayList<>();
-  private List<String> answers = new ArrayList<>();
+  private List<Integer> answers = new ArrayList<>();
   private int i = 0;
 
-  public void addQuestion(String q, String answ1, String answ2, String answ3, String answ4, String correctAnsw) {
-    questions.add(new Question(q, answ1, answ2, answ3, answ4));
-    answers.add(correctAnsw);
+  public void addQuestion(@NotNull String question,
+                          int correctAnswer, @NotNull String... answers) {
+    questions.add(new Question(question, answers));
+    this.answers.add(correctAnswer);
   }
 
   public Question getNextQuestion() {
@@ -21,7 +26,7 @@ public class Game {
     }
   }
 
-  public boolean checkAnswer(Question q, String answer) {
-    return answers.get(questions.indexOf(q)).equals(answer);
+  public boolean checkAnswer(Question q, int answer) {
+    return answers.get(questions.indexOf(q)).equals(answer-1);
   }
 }

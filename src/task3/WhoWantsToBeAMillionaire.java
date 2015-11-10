@@ -8,19 +8,19 @@ import java.util.Scanner;
 public class WhoWantsToBeAMillionaire {
   public static void main(String[] args) {
     Game game = new Game();
-    game.addQuestion("What is the Capital of Great Britain?", "Paris", "Karaganda", "Dublin", "London", "London");
-    game.addQuestion("Who is the author of Godfather novel?", "Hemingway", "Puzo", "Vonnegut", "Tolstoy", "Puzo");
-    game.addQuestion("What is the distance to the Moon?", "156 000 km", "384 000 km", "432 000 km", "521 000 km", "384 000 km");
+    game.addQuestion("What is the Capital of Great Britain?", 3, "Paris", "Karaganda", "Dublin", "London");
+    game.addQuestion("Who is the author of Godfather novel?", 1, "Hemingway", "Puzo", "Vonnegut", "Tolstoy");
+    game.addQuestion("What is the distance to the Moon?", 2, "156 000 km", "384 000 km", "432 000 km", "521 000 km");
 
     Scanner scanner = new Scanner(System.in);
     for (Question q = game.getNextQuestion(); q != null; q = game.getNextQuestion()) {
-      System.out.println(q.q);
-      System.out.println("1. " + q.answ1);
-      System.out.println("2. " + q.answ2);
-      System.out.println("3. " + q.answ3);
-      System.out.println("4. " + q.answ4);
+      System.out.println(q.getQuestion());
+      for (int i = 0; i < Game.MAX_ANSWERS_COUNT; i++) {
+        System.out.println("1. " + q.getAnswer(i));
 
-      String playerGuess = scanner.nextLine();
+      }
+
+      int playerGuess = scanner.nextInt();
       if (!game.checkAnswer(q, playerGuess)) {
         throw new RuntimeException("You failed!");
       }
